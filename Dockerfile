@@ -12,11 +12,13 @@ RUN apt-get update \
 		git \
 		cmake \
 		build-essential \
-		libleptonica-dev
+		libleptonica-dev \
+        python3-dev
 
 RUN apt-get update \
 	&& apt-get install -y \
 		liblog4cplus-dev \
+		libboost-python-dev \
 		libcurl3-dev
 
 # Clone the latest code from GitHub
@@ -99,3 +101,12 @@ RUN ldconfig
 RUN rm -rf /temp/opencv_contrib
 RUN rm -rf /temp/opencv
 # -- END Build recipe OpenCV
+
+# -- START Build recipe dlib
+RUN apt-get update \
+	&& apt-get install -y \
+		python3-dev \
+		libboost-python-dev \
+
+RUN pip install dlib
+# -- END Build recipe dlib

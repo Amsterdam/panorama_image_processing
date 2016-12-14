@@ -1,2 +1,2 @@
 # panorama_image_processing
-Panorama docker with OpenALPR and OpenCV
+Panorama docker with OpenALPR, Dlib and OpenCV
