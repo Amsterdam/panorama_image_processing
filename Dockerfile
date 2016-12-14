@@ -106,7 +106,7 @@ RUN rm -rf /temp/opencv
 RUN apt-get update \
 	&& apt-get install -y \
 		python3-dev \
-		libboost-python-dev \
+		libboost-python-dev
 
 RUN pip install dlib
 # -- END Build recipe dlib
