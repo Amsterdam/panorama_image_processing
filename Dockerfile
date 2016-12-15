@@ -4,6 +4,15 @@ MAINTAINER datapunt.ois@amsterdam.nl
 ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
 
+# -- START Build recipe dlib
+RUN apt-get update \
+	&& apt-get install -y \
+		python3-dev \
+		libboost-python-dev
+
+RUN pip install dlib
+# -- END Build recipe dlib
+
 # -- START Build recipe found on https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux)
 RUN apt-get update \
 	&& apt-get install -y \
@@ -98,15 +107,7 @@ WORKDIR /temp/opencv/build
 RUN make install
 RUN ldconfig
 
+WORKDIR /app
 RUN rm -rf /temp/opencv_contrib
 RUN rm -rf /temp/opencv
 # -- END Build recipe OpenCV
-
-# -- START Build recipe dlib
-RUN apt-get update \
-	&& apt-get install -y \
-		python3-dev \
-		libboost-python-dev
-
-RUN pip install dlib
-# -- END Build recipe dlib
