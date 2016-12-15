@@ -4,16 +4,6 @@ MAINTAINER datapunt.ois@amsterdam.nl
 ENV PYTHONUNBUFFERED 1
 EXPOSE 8000
 
-# -- START Build recipe dlib
-RUN apt-get update \
-	&& apt-get install -y \
-		python3-dev \
-		libboost-python-dev
-
-RUN pip install dlib
-# -- END Build recipe dlib
-
-# -- START Build recipe found on https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux)
 RUN apt-get update \
 	&& apt-get install -y \
 		libopencv-dev \
@@ -22,14 +12,16 @@ RUN apt-get update \
 		cmake \
 		build-essential \
 		libleptonica-dev \
-        python3-dev
-
-RUN apt-get update \
-	&& apt-get install -y \
+        python3-dev \
 		liblog4cplus-dev \
 		libboost-python-dev \
-		libcurl3-dev
+		libcurl3-dev \
+		pkg-config \
+        libjpeg62-turbo-dev \
+        libatlas-base-dev \
+        gfortran
 
+# -- START Build recipe found on https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux)
 # Clone the latest code from GitHub
 WORKDIR /temp
 RUN git clone https://github.com/openalpr/openalpr.git
@@ -61,25 +53,10 @@ RUN cp /temp/openalpr/src/bindings/python/openalpr/* /app/openalpr/
 RUN rm -rf /temp/openalpr
 # -- END Build OpenALPR
 
+RUN pip install --no-cache-dir dlib
+
 # -- START Build recipe OpenCV
 RUN pip install --no-cache-dir numpy
-
-RUN apt-get update \
-	&& apt-get install -y \
-		pkg-config \
-		git \
-		cmake \
-		build-essential
-
-# only jpeg
-RUN apt-get update \
-	&& apt-get install -y \
-		libjpeg62-turbo-dev
-
-RUN apt-get update \
-	&& apt-get install -y \
-		libatlas-base-dev \
-		gfortran
 
 WORKDIR /temp
 RUN git clone https://github.com/opencv/opencv.git
