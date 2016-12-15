@@ -91,6 +91,7 @@ RUN rm -rf /temp/opencv
 # -- START Build recipe dlib
 RUN apt-get update \
 	&& apt-get install -y \
+		python3-dev \
 		libboost-python-dev
 
 RUN pip install --no-cache-dir dlib
