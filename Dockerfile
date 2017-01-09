@@ -62,10 +62,10 @@ RUN git clone https://github.com/opencv/opencv.git
 RUN git clone https://github.com/opencv/opencv_contrib.git
 
 WORKDIR /temp/opencv_contrib
-RUN git checkout 3.1.0
+RUN git checkout 3.2.0
 
 WORKDIR /temp/opencv
-RUN git checkout 3.1.0
+RUN git checkout 3.2.0
 RUN mkdir build
 
 WORKDIR /temp/opencv/build
