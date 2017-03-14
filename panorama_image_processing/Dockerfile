@@ -33,3 +33,9 @@ RUN make
 WORKDIR /temp/openalpr/src/build
 RUN make install
 # -- END Build recipe found on https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux)
+
+WORKDIR /app
+RUN mkdir openalpr
+RUN cp /temp/openalpr/src/bindings/python/openalpr/* /app/openalpr/
+RUN rm -rf /temp/openalpr
+# -- END Build OpenALPR
