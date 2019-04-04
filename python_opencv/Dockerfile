@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6.2-stretch
 MAINTAINER datapunt.ois@amsterdam.nl
 
 ENV PYTHONUNBUFFERED 1
@@ -23,10 +23,10 @@ RUN git clone https://github.com/opencv/opencv.git
 RUN git clone https://github.com/opencv/opencv_contrib.git
 
 WORKDIR /temp/opencv_contrib
-RUN git checkout 3.2.0
+RUN git checkout 3.4.5
 
 WORKDIR /temp/opencv
-RUN git checkout 3.2.0
+RUN git checkout 3.4.5
 RUN mkdir build
 
 WORKDIR /temp/opencv/build
@@ -48,4 +48,4 @@ WORKDIR /app
 RUN rm -rf /temp/opencv_contrib
 RUN rm -rf /temp/opencv
 
-RUN pip install --no-cache-dir 'opencv-python>=3.2.0,<3.3.0'
+RUN pip install --no-cache-dir 'opencv-python>=3.4.5,<4.0.0'
